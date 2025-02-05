@@ -1,0 +1,126 @@
+/* Corps de la page */
+body {
+    font-family: 'Kulim Park', sans-serif;
+    margin: 0;
+    background: black;
+    color: #FFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+  
+    /* Curseur par défaut */
+    cursor: none; /* Supprime le curseur natif pour le remplacer par une image personnalisée via JS */
+  }
+  
+  /* Conteneur principal */
+  .jeu-interface {
+    width: 90%;
+    max-width: 1200px;
+    background: #000;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    position: relative;
+  }
+  
+  /* Menu du jeu */
+  .menu-jeu {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+  }
+  
+  /* Sélection des joueurs */
+  .selection {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    width: 80%;
+  }
+  
+  /* Conteneur joueur */
+  .joueur {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px solid #2ED7FF;
+    box-shadow: 0 4px 15px rgba(46, 215, 255, 0.6), 0 0 10px black;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+  }
+  
+  /* Titre joueur */
+  .joueur h2 {
+    font-size: 2rem;
+    color: #FFC61D;
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px rgba(255, 198, 29, 0.8);
+  }
+  
+  /* Organisation des pions */
+  .pions {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  
+  .ligne {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+  }
+  
+  /* Pions */
+  .pion {
+    width: 70px;
+    height: 70px;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+  
+  .pion:hover {
+    border-color: #FFC61D;
+    box-shadow: 0 0 10px #FFC61D;
+  }
+  
+  /* Animation pour le curseur */
+  @keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* Bouton démarrer */
+  .start-button {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    color: #000;
+    background: #FFC61D;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+  
+  .start-button:hover {
+    background: #2ED7FF;
+    transform: scale(1.1);
+  }
+  
+  /* Logo du jeu */
+  .logo-jeu {
+    width: 450px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  

@@ -1,0 +1,413 @@
+/* Animation de rotation */
+@keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* Apparence du curseur personnalisé */
+  #rotating-cursor {
+    z-index: 1000; /* Toujours au-dessus des éléments */
+  }
+  
+  /* Désactive complètement le curseur natif */
+  body {
+    cursor: none;
+  }
+  
+  button {
+    cursor: none; /* Empêche le curseur pointer par défaut sur les boutons */
+  }
+  
+  
+
+/* Style global */
+
+body {
+    font-family: 'Kulim Park', sans-serif;
+    margin: 0;
+    background: linear-gradient(120deg, #1a1a1a, #0b0b0b);
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+
+    cursor: none;
+}
+
+/* Container principal */
+.container {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+}
+
+.haut-bas {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    padding: 20px;
+    gap: 20px;
+}
+
+.haut {
+    display: flex;
+    gap: 6rem;
+    height: 10%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+
+}
+
+/* Cadre pour chaque joueur */
+.carte-joueur {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    background-color: #FFC61D;
+    border-radius: 15px;
+    height: 100%;
+    border: 2px solid white;
+    box-shadow: 0 4px 15px #FFC61D, 0 0 10px black;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.chrono {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+    background-color: #FFC61D;
+    border-radius: 15px;
+    height: 100%;
+    width: auto;
+    border: 2px solid white;
+    box-shadow: 0 4px 15px #FFC61D, 0 0 10px black;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.chrono p {
+    font-size: 40px;
+    color: black;
+    padding: 2rem;
+}
+
+.infos-joueur {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    height: auto;
+    width: 100%;
+    color: black;
+}
+
+
+.nom-joueur {
+    font-size: 1.5rem;
+    padding: 2rem;
+}
+
+.points-joueur {
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    height: 60px;
+    padding: 1rem;
+    color: black;
+}
+
+.icone-roue {
+    width: 20px;
+    height: 20px;
+    color: black;
+
+}
+
+.bas {
+    display: flex;
+    height: 90%;
+    width: auto;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+
+.jeu-plateau {
+    width: 100%;
+    height: auto;
+}
+
+.container-gauche {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+    width: 25%;
+    height: auto;
+    background-color: #2ED7FF;
+
+    
+}
+
+.gauche {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: 100%;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: #FFC61D;
+    border: 2px solid white;
+    box-shadow: 0 4px 15px #FFC61D, 0 0 10px black;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+
+    
+}
+
+
+
+
+
+
+.scene-jeu {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    /*perspective: 600px;*/
+    
+}
+
+.cube-jeu {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateX(0deg) rotateY(0deg);
+    transition: transform 1s ease-in-out;
+}
+
+.face {
+    width: 100px;
+    height: 100px;
+    background: #2ED7FF;
+    color: white;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid white;
+    position: absolute;
+    border-radius: 10px;
+}
+
+.face2 {
+    width: 100px;
+    height: 100px;
+    background: #FFC61D;
+    color: white;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid white;
+    position: absolute;
+    border-radius: 15px;
+}
+
+.face-1 {
+    transform: rotateY(0deg) translateZ(50px);
+}
+.face-2 {
+    transform: rotateY(90deg) translateZ(50px);
+}
+.face-3 {
+    transform: rotateY(180deg) translateZ(50px);
+}
+.face-4 {
+    transform: rotateY(-90deg) translateZ(50px);
+}
+.face-5 {
+    transform: rotateX(90deg) translateZ(50px);
+}
+.face-6 {
+    transform: rotateX(-90deg) translateZ(50px);
+}
+
+.bi-slash-circle {
+    font-size: 1.2rem;
+}
+
+.bi-caret-left-square-fill {
+    font-size: 1.2rem;
+}
+
+.bi-caret-right-square-fill {
+    font-size: 1.2rem;
+}
+
+.bouton-lancer1 {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.bouton-lancer2 {
+    display: flex;
+    flex-direction: column;
+}
+
+.bouton-lancer1 button {
+    background: #2ED7FF;
+    color: white;
+    border: 1px solid #2ED7FF;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 5px;
+    font-size: 1.2rem;
+    height: 40px;
+    width: 140px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+    overflow: hidden;
+}
+  
+.bouton-lancer1 button:hover {
+    background: black;
+    color: #2ED7FF;
+    border: 1px solid #2ED7FF;
+
+}
+
+.bouton-lancer2 button {
+    background: #FFC61D;
+    color: white;
+    border: 1px solid #FFC61D;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 5px;
+    font-size: 1.2rem;
+    height: 40px;
+    width: 140px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+    overflow: hidden;
+}
+  
+.bouton-lancer2 button:hover {
+    background: black;
+    color: #FFC61D;
+    border: 1px solid #FFC61D;
+    transform: scale(1.1);
+}
+
+/* TEST AVEC CARTES */
+.section-carte {
+    font-family: 'Kulim Park', sans-serif;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    background-color: #FFC61D;
+    border: 2px solid white;
+    box-shadow: 0 4px 15px #FFC61D, 0 0 10px black;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.titre-section-carte {
+    display: flex;
+    font-family: 'Kulim Park', sans-serif;
+    background-color: #2ED7FF;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border: solid 3px #2ED7FF;
+    align-items: center;
+    justify-content: center;
+}
+
+.titre-section-carte p {
+    font-family: 'Kulim Park', sans-serif;
+    font-size: 2rem;
+    
+}
+
+.zone-carte {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+.carte {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: 50%;
+    background-color: black;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    gap: 20px;
+}
+
+/* Format d'image pose problème */
+.recto-carte {
+    width: 100%;
+    height: auto;
+}
+
+.image2-carte {
+    width: auto;
+    height: 20%;
+}
+/********************************/
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  .bouton-action {
+    background: #FFC61D;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+  }
+  
+  .bouton-action:hover {
+    background: #2ED7FF;
+    transform: scale(1.1);
+  }
+  

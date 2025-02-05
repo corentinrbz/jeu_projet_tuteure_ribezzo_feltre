@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dé 3D Avancé</title>
+  <link rel="stylesheet" href="./styles/jeu.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="haut-bas">
+            <div class="haut">
+                <div class="carte-joueur">
+                    <div class="infos-joueur">
+                        <div class="nom-joueur"> Joueur 1 </div>
+                    </div>
+                    <div class="points-joueur">
+                        <p>0</p>
+                        <img src="./images/roue_noir.png" alt="Roue blanche" class="icone-roue">
+                    </div>
+                </div>
+    
+                <div class="chrono">
+                    <p>00</p>
+                </div>
+    
+                <!-- Joueur 2 -->
+                <div class="carte-joueur">
+                    <div class="infos-joueur">
+                        <div class="nom-joueur"> Joueur 2 </div>
+                    </div>
+                    <div class="points-joueur">
+                        <p>0</p>
+                        <img src="./images/roue_noir.png" alt="Roue blanche" class="icone-roue">
+                    </div>
+                </div>
+            </div>
+    
+            <div class="bas">
+                <img src="./images/plateau.png" alt="plateau du jeu" class="jeu-plateau">
+            </div>
+        </div>
+
+        <div class="container-gauche">
+            <div class="gauche">
+                <div class="scene-jeu">
+                    <div class="cube-jeu" id="de-1">
+                        <div class="face face-1"><strong>1</strong></div>
+                        <div class="face face-2"><strong>2</strong></div>
+                        <div class="face face-3"><strong>3</strong></div>
+                        <div class="face face-4"><strong>4</strong></div>
+                        <div class="face face-5"><strong>5</strong></div>
+                        <div class="face face-6"><strong>6</strong></div>
+                    </div>
+                    <div class="bouton-lancer1">
+                        <button id="lancer-de-j1">Lancer ou <strong><i class="bi bi-caret-left-square-fill"></i></strong></button>
+                    </div>
+                </div>
+                <div class="scene-jeu">
+                    <div class="cube-jeu" id="de-2">
+                        <div class="face2 face-1"><strong>1</strong></div>
+                        <div class="face2 face-2"><strong>2</strong></div>
+                        <div class="face2 face-3"><strong>3</strong></div>
+                        <div class="face2 face-4"><strong><i class="bi bi-arrow-counterclockwise"></i></strong></div>
+                        <div class="face2 face-5"><strong><i class="bi bi-arrow-counterclockwise"></i></strong></div>
+                        <div class="face2 face-6"><strong><i class="bi bi-arrow-counterclockwise"></i></strong></div>
+                    </div>
+                    <div class="bouton-lancer2">
+                        <button id="lancer-de-j2">Lancer ou <strong><i class="bi bi-caret-right-square-fill"></i></strong></button>
+                    </div>
+                </div>
+                <div class="section-cartes">
+                    <div class="grp-scene-jeu">
+                        <div class="zone-carte">
+                            <img src="./images/recto_carte.png" alt="Recto de la carte question" class="recto-carte">
+                            <div class="bouton-lancer2">
+                                <button id="lancer-de-j1">Lancer le dé</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+              
+              
+              
+
+
+
+        </div>
+    </div>
+    <script src="./scripts/jeu.js"></script>
+</body>
+</html>
