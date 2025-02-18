@@ -15,7 +15,6 @@
   
   /* Désactive complètement le curseur natif */
   body {
-    cursor: none;
   }
   
   button {
@@ -29,7 +28,7 @@
 body {
     font-family: 'Kulim Park', sans-serif;
     margin: 0;
-    background: linear-gradient(120deg, #1a1a1a, #0b0b0b);
+    background-image: linear-gradient(to left, #051937, #5b2c5f, #b23d61, #ea7042, #ebbd12);
     color: white;
     text-align: center;
     display: flex;
@@ -39,7 +38,6 @@ body {
     height: 100vh;
     overflow: hidden;
 
-    cursor: none;
 }
 
 /* Container principal */
@@ -144,6 +142,12 @@ body {
     
 }
 
+.bas svg{
+    max-width: 1000px;
+    opacity: 1;
+
+}
+
 
 .jeu-plateau {
     width: 100%;
@@ -219,51 +223,6 @@ body {
     border-radius: 10px;
 }
 
-.face2 {
-    width: 100px;
-    height: 100px;
-    background: #FFC61D;
-    color: white;
-    font-size: 1.2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid white;
-    position: absolute;
-    border-radius: 15px;
-}
-
-.face-1 {
-    transform: rotateY(0deg) translateZ(50px);
-}
-.face-2 {
-    transform: rotateY(90deg) translateZ(50px);
-}
-.face-3 {
-    transform: rotateY(180deg) translateZ(50px);
-}
-.face-4 {
-    transform: rotateY(-90deg) translateZ(50px);
-}
-.face-5 {
-    transform: rotateX(90deg) translateZ(50px);
-}
-.face-6 {
-    transform: rotateX(-90deg) translateZ(50px);
-}
-
-.bi-slash-circle {
-    font-size: 1.2rem;
-}
-
-.bi-caret-left-square-fill {
-    font-size: 1.2rem;
-}
-
-.bi-caret-right-square-fill {
-    font-size: 1.2rem;
-}
-
 .bouton-lancer1 {
     display: flex;
     flex-direction: column;
@@ -282,9 +241,9 @@ body {
     align-items: center;
     justify-content: center;
     padding: 5px 5px;
-    font-size: 1.2rem;
-    height: 40px;
-    width: 140px;
+    font-size: 1rem;
+    height: 50px;
+    width: 130px;
     border-radius: 15px;
     cursor: pointer;
     transition: transform 0.2s ease, background-color 0.3s ease;
@@ -292,7 +251,7 @@ body {
 }
   
 .bouton-lancer1 button:hover {
-    background: black;
+    background: rgb(170, 157, 157);
     color: #2ED7FF;
     border: 1px solid #2ED7FF;
 

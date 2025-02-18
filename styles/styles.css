@@ -37,25 +37,13 @@ body {
   .selection {
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
     gap: 40px;
     width: 80%;
   }
   
-  /* Conteneur joueur */
-  .joueur {
-    flex: 1;
-    background: rgba(0, 0, 0, 0.9);
-    padding: 20px;
-    border-radius: 15px;
-    border: 2px solid #2ED7FF;
-    box-shadow: 0 4px 15px rgba(46, 215, 255, 0.6), 0 0 10px black;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
-  }
-  
   /* Titre joueur */
-  .joueur h2 {
+  .joueur {
     font-size: 2rem;
     color: #FFC61D;
     margin-bottom: 15px;
@@ -65,28 +53,53 @@ body {
   /* Organisation des pions */
   .pions {
     display: flex;
-    flex-direction: column;
-    gap: 40px;
-  }
-  
-  .ligne {
-    display: flex;
-    justify-content: center;
     gap: 40px;
   }
   
   /* Pions */
   .pion {
-    width: 70px;
-    height: 70px;
     border: 2px solid transparent;
     border-radius: 10px;
     transition: transform 0.3s ease, border-color 0.3s ease;
   }
   
+  .pion.selected{
+    border-color: #FFC61D;
+    box-shadow: 0 0 10px #FFC61D;
+  }
+
   .pion:hover {
     border-color: #FFC61D;
     box-shadow: 0 0 10px #FFC61D;
+  }
+
+  /*bouton suivant*/
+  .btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: none;
+    margin: 10px;
+  }
+
+  .btn:hover {
+      background-color: #0056b3;
+  }
+
+  .player-info {
+      margin-bottom: 20px;
+      font-size: 20px;
+      color: #333;
+  }
+
+  /*nom joueur 1 et 2*/
+  .player-info {
+      margin-bottom: 20px;
+      font-size: 20px;
+      color: #333;
   }
   
   /* Animation pour le curseur */
@@ -100,21 +113,6 @@ body {
   }
   
   /* Bouton démarrer */
-  .start-button {
-    padding: 15px 30px;
-    font-size: 1.2rem;
-    color: #000;
-    background: #FFC61D;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: transform 0.3s ease, background-color 0.3s ease;
-  }
-  
-  .start-button:hover {
-    background: #2ED7FF;
-    transform: scale(1.1);
-  }
   
   /* Logo du jeu */
   .logo-jeu {

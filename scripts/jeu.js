@@ -1,79 +1,128 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const body = document.querySelector('body');
-  const buttons = document.querySelectorAll('button'); // Tous les boutons
-  let rotatingCursor;
 
-  // Fonction : Création du curseur personnalisé
-  function createCursor() {
-    if (!rotatingCursor) {
-      rotatingCursor = document.createElement('div');
-      rotatingCursor.id = 'rotating-cursor';
-      rotatingCursor.style.position = 'fixed';
-      rotatingCursor.style.width = '32px';
-      rotatingCursor.style.height = '32px';
-      rotatingCursor.style.background = "url('./scripts/roue_blanc_32x32.png') no-repeat center/contain";
-      rotatingCursor.style.pointerEvents = 'none'; // Empêche les interactions
-      rotatingCursor.style.animation = 'none'; // Pas de rotation par défaut
-      body.style.cursor = "none"; // Cache le curseur natif
-      body.appendChild(rotatingCursor);
+    // Récupération des pions depuis le localStorage
+    const player1Pion = localStorage.getItem('player1Token');
+    const player2Pion = localStorage.getItem('player2Token');
 
-      // Déplace le curseur personnalisé avec la souris
-      document.addEventListener('mousemove', moveCursor);
+    // Récupération du point de départ dans le SVG
+    const startPoint = document.getElementById('depart');
+    if (startPoint) {
+        // Récupérer les coordonnées du point de départ
+        const x = startPoint.getAttribute('x') || startPoint.getAttribute('cx') || 900;
+        const y = startPoint.getAttribute('y') || startPoint.getAttribute('cy') || 500;
+
+        // Créer les éléments image dans le SVG pour les pions
+        const svgNS = "http://www.w3.org/2000/svg";
+        
+        // Pion joueur 1
+        const pion1 = document.createElementNS(svgNS, "image");
+        pion1.setAttributeNS(null, "href", player1Pion);
+        pion1.setAttributeNS(null, "width", "50"); 
+        pion1.setAttributeNS(null, "height", "50");
+        pion1.setAttributeNS(null, "x", Number(x) - 20); 
+        pion1.setAttributeNS(null, "y", Number(y) - 15);
+        pion1.setAttributeNS(null, "id", "pion-joueur1");
+
+        // Pion joueur 2
+        const pion2 = document.createElementNS(svgNS, "image");
+        pion2.setAttributeNS(null, "href", player2Pion);
+        pion2.setAttributeNS(null, "width", "50");
+        pion2.setAttributeNS(null, "height", "50");
+        pion2.setAttributeNS(null, "x", Number(x) + 20);
+        pion2.setAttributeNS(null, "y", Number(y) - 15);
+        pion2.setAttributeNS(null, "id", "pion-joueur2");
+
+        // Récupérer l'élément SVG principal
+        const svg = document.querySelector('svg');
+        
+        // Ajouter les pions au SVG
+        svg.appendChild(pion1);
+        svg.appendChild(pion2);
     }
-  }
 
-  // Fonction : Mise à jour de la position du curseur
-  function moveCursor(e) {
-    if (rotatingCursor) {
-      rotatingCursor.style.left = `${e.pageX - 16}px`;
-      rotatingCursor.style.top = `${e.pageY - 16}px`;
+
+
+    // DEfinition des positions
+    const gamePositions = {
+        1: { x: 770, y: 840 },  // position arrivé
+        2: { x: 1000, y: 250 }, 
+        3: { x: 1300, y: 80 },
+        4: { x: 1650, y: 240 },
+        5: { x: 1740, y: 540 },
+        6: { x: 1610, y: 840 },
+        7: { x: 1310, y: 970 },
+        8: { x: 1050, y: 870 },
+        9: { x: 730, y: 170 },
+        10: { x: 470, y: 70 },
+        11: { x: 170, y: 230 },
+        12: { x: 60, y: 530 },
+        13: { x: 160, y: 830 },
+        14: { x: 470, y: 980 },
+        15: { x: 770, y: 840 }
+    };
+
+  let currentPlayer = 1;
+  const playerPositions = {
+      1: 1,
+      2: 1
+  };
+
+  const boutonLancer = document.getElementById('lancer-de-j1');
+
+  boutonLancer.addEventListener('click', function () {
+    const diceValue = Math.floor(Math.random() * 6) + 1; 
+    const faceDiv = document.querySelector('#de-1 .face'); 
+
+    if (faceDiv) {
+        faceDiv.textContent = diceValue; 
     }
-  }
+      this.disabled = true; 
 
-  // Fonction : Activation de la rotation
-  function activateRotation() {
-    if (rotatingCursor) {
-      rotatingCursor.style.animation = 'rotation 2s linear infinite'; // Active la rotation
-    }
-  }
+      setTimeout(() => {
+          movePion(currentPlayer, diceValue); 
 
-  // Fonction : Désactivation de la rotation
-  function deactivateRotation() {
-    if (rotatingCursor) {
-      rotatingCursor.style.animation = 'none'; // Stoppe la rotation
-    }
-  }
+          // Passe au joueur suivant
+          currentPlayer = currentPlayer === 1 ? 2 : 1;
+          console.log('Nouveau joueur :', currentPlayer);
 
-  // Fonction : Animation des dés
-  function lancerDe(id) {
-    const cube = document.querySelector(`#${id}`);
-    const randomX = Math.floor(Math.random() * 4) * 90 + 360; // Génère une rotation aléatoire sur X
-    const randomY = Math.floor(Math.random() * 4) * 90 + 360; // Génère une rotation aléatoire sur Y
-
-    cube.style.transform = `rotateX(${randomX}deg) rotateY(${randomY}deg)`; // Applique les rotations
-  }
-
-  // Applique le curseur personnalisé au chargement de la page
-  createCursor();
-
-  // Gestion des boutons : Rotation active uniquement au survol
-  buttons.forEach(button => {
-    button.addEventListener('mouseover', () => {
-      activateRotation(); // Active la rotation lorsque le curseur est sur un bouton
-    });
-
-    button.addEventListener('mouseout', () => {
-      deactivateRotation(); // Désactive la rotation lorsque le curseur quitte le bouton
-    });
-
-    // Déclenchement de l'animation des dés au clic
-    button.addEventListener('click', (e) => {
-      const buttonId = e.target.id;
-      if (buttonId === 'lancer-de-j1') {
-        lancerDe('de-1'); // Dé 1 tourne
-      } else if (buttonId === 'lancer-de-j2') {
-        lancerDe('de-2'); // Dé 2 tourne
-      }
-    });
+        // Mise à jour du bouton
+        const joueurSpan = this.querySelector('.joueur');
+        if (joueurSpan) {
+            joueurSpan.textContent = `Joueur ${currentPlayer}`;
+        }
+        
+        // Mise à jour de l'ID et de la valeur du bouton
+        this.id = `lancer-de-j${currentPlayer}`;
+        this.setAttribute('data-player', currentPlayer);
+        this.disabled = false;
+      }, 1000);
   });
-});
+
+  // Fonction pour déplacer un pion
+  function movePion(playerNumber, diceValue) {
+      const currentPos = playerPositions[playerNumber];
+      const newPos = Math.min(currentPos + diceValue, 14);
+      playerPositions[playerNumber] = newPos;
+
+      const pion = document.getElementById(`pion-joueur${playerNumber}`);
+      const newCoords = gamePositions[newPos];
+
+      pion.style.transition = "all 0.5s ease";
+      
+      // Déplacer le pion
+      pion.setAttributeNS(null, "x", newCoords.x - (playerNumber === 1 ? 20 : -20));
+      pion.setAttributeNS(null, "y", newCoords.y - 15);
+  }
+    
+
+ 
+  });
+
+
+
+
+
+
+
+
+
