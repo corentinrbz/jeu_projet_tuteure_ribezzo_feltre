@@ -352,6 +352,11 @@ document.addEventListener('DOMContentLoaded', () => {
         return targetPos;
     }
 
+
+
+    
+    
+
     function animatePionMovement(pion, startPos, endPos, playerNumber, currentStep) {
         if (startPos + currentStep >= endPos) {
             return endPos;
@@ -375,6 +380,7 @@ document.addEventListener('DOMContentLoaded', () => {
             animatePionMovement(pion, startPos, endPos, playerNumber, currentStep + 1);
         }, 300);
     }
+
     
     // Fonction pour mettre à jour l'affichage des points
     function updatePointsDisplay() {
@@ -391,27 +397,23 @@ document.addEventListener('DOMContentLoaded', () => {
     function updatePlayerHighlight(playerNumber) {
         // Sélectionner les deux cartes de joueur
         const carteJoueur1 = document.querySelector('.carte-joueur:nth-child(1)');
-        const carteJoueur2 = document.querySelector('.carte-joueur:nth-child(3)');
+        const carteJoueur2 = document.querySelector('.carte-joueur:nth-child(2)');
         
         if (playerNumber === 1) {
             // Mettre en évidence le joueur 1
-            carteJoueur1.style.backgroundColor = '#FFA500'; // Orange plus foncé
-            carteJoueur1.style.boxShadow = '0 8px 25px #FFA500, 0 0 15px black';
-            carteJoueur1.style.transform = 'scale(1.05)';
+            carteJoueur1.style.backgroundColor = '#FFA500'; 
+            carteJoueur1.style.transform = 'scale(1.1)';
             
-            // Remettre le joueur 2 à l'état normal
-            carteJoueur2.style.backgroundColor = '#FFC61D';
-            carteJoueur2.style.boxShadow = '0 4px 15px #FFC61D, 0 0 10px black';
+            // Remettre le joueur 1 à l'état normal
+            carteJoueur2.style.backgroundColor = '#b79d4f';
             carteJoueur2.style.transform = 'scale(1)';
         } else {
             // Mettre en évidence le joueur 2
             carteJoueur2.style.backgroundColor = '#FFA500'; // Orange plus foncé
-            carteJoueur2.style.boxShadow = '0 8px 25px #FFA500, 0 0 15px black';
-            carteJoueur2.style.transform = 'scale(1.05)';
+            carteJoueur2.style.transform = 'scale(1.1)';
             
             // Remettre le joueur 1 à l'état normal
-            carteJoueur1.style.backgroundColor = '#FFC61D';
-            carteJoueur1.style.boxShadow = '0 4px 15px #FFC61D, 0 0 10px black';
+            carteJoueur1.style.backgroundColor = '#b79d4f';
             carteJoueur1.style.transform = 'scale(1)';
         }
     }

@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const popup = document.querySelector('.popup');
     const zoneCarte = document.querySelector('.zone-carte');
     const boutonLancer = document.getElementById('lancer-de');
+    const chronoElement = document.querySelector('.chronoo p');
 
     const questionCasesVisited = {
         1: {},
@@ -198,9 +199,36 @@ document.addEventListener('DOMContentLoaded', function() {
         popup.style.display = 'none';
         zoneCarte.style.display = 'none';
         boutonLancer.disabled = false;
+        clearInterval(timerInterval); // Arrêt du chronomètre
 
         if (document.getElementById('lancer-de-j1')) {
         document.getElementById('lancer-de-j1').disabled = false;}
+    }
+
+    let timerInterval; 
+
+    function startTimer() {
+        let timeLeft = 20; // Temps initial en secondes
+        chronoElement.textContent = timeLeft + " sec"; // Affichage initial
+
+        timerInterval = setInterval(function() {
+            timeLeft--;
+            chronoElement.textContent = timeLeft + " sec";
+
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                messageDiv.textContent = "Le temps est écoulé!";
+                messageDiv.style.display = 'block';
+
+                setTimeout(function() {
+                    messageDiv.style.display = 'none';
+                    fermerPopup();
+                    if (window.finishTurn) {
+                        window.finishTurn();
+                    }
+                }, 2000);
+            }
+        }, 1000);
     }
     
     function lancerDe() {
@@ -228,6 +256,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (question) {
                 // Afficher question et réponses
                 afficherQuestion(question);
+                startTimer();
             } else {
                 // Si aucune question n'est disponible pour ce niveau
                 messageDiv.textContent = "Aucune question disponible pour le niveau " + niveau;

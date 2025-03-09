@@ -85,28 +85,13 @@ body {
     border-radius: 15px;
     height: 100%;
     border: 2px solid rgb(0, 0, 0);
-    box-shadow: 0 1px 1px #FFC61D, 0 0 0px black;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.chrono {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 20%;
-    background-color: #FFC61D;
-    border-radius: 15px;
-    height: 100%;
-    width: auto;
-    border: 2px solid white;
-    box-shadow: 0 4px 15px #FFC61D, 0 0 10px black;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.chrono p {
-    font-size: 40px;
-    color: black;
-    padding: 2rem;
+#timer{
+    color: #0a0b0b;
+    font-weight: bold;
+    font-size: larger;
 }
 
 .infos-joueur {
@@ -170,7 +155,6 @@ body {
     gap: 20px;
     width: 25%;
     height: auto;
-    background-color: #000000;
 
     
 }
@@ -180,15 +164,12 @@ body {
     flex-direction: column;
     width: auto;
     align-items: center;
-    height: 100%;
+    height: 50%;
     padding: 20px;
     border-radius: 15px;
-    background-color: #FFC61D;
-    border: 5px solid rgb(47, 193, 226);
+    background-image: linear-gradient(to left top, #ffc61d, #ffbc49, #feb566, #f4b17f, #e3af94);
+    border: 5px solid rgb(25, 30, 31);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    
-
-    
 }
 
 
@@ -216,7 +197,7 @@ body {
 .face {
     width: 100px;
     height: 100px;
-    background: #2ED7FF;
+    background: #0a0b0b;
     color: white;
     font-size: 1.2rem;
     display: flex;
@@ -239,9 +220,9 @@ body {
 }
 
 .bouton-lancer1 button {
-    background: #2ED7FF;
-    color: white;
-    border: 1px solid #2ED7FF;
+    background: #efefef;
+    color: rgb(0, 0, 0);
+    border: 1px solid #f3f3f3;
     align-items: center;
     justify-content: center;
     padding: 5px 5px;
@@ -309,6 +290,7 @@ body {
     position: fixed;
     display: flex;
     align-items: center;
+    justify-content: center;
     min-width:50rem;
     height: 40rem;
     top: 50%;
@@ -319,18 +301,23 @@ body {
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     z-index: 1000;
-    width: 300px; /* Ajout pour définir une largeur */
+}
+
+.cont1{
+    display: flex;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.cont2{
+    width: 30rem;
+    height: auto;
 }
 
 .zone-carte {
     flex-direction: column;
     display: none;
-    background-image: url(/projet_tuteure/images/recto_carte.png);
-    background-size: cover;
-
     margin-top: 15px;
-    height: 20rem;
-    width: 40rem; /* Ajout pour définir une hauteur */
 }
 
 .face {
@@ -344,6 +331,7 @@ body {
     font-weight: bold;
     margin-bottom: 15px;
     text-align: center;
+    color: #0a0b0b;
 }
 
 /* Styles pour les réponses */
@@ -357,14 +345,14 @@ body {
     padding: 10px;
     border: none;
     border-radius: 5px;
-    background-color: #4CAF50;
+    background-color: #f7ab1d;
     color: white;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
 .reponse-btn:hover {
-    background-color: #45a049;
+    background-color: #d0ca2e;
 }
 
 /* Styles pour le bouton lancer */
@@ -374,7 +362,8 @@ body {
 }
 
 #lancer-de {
-    padding: 10px 20px;
+    padding: 30px   20px;
+    width: auto;
     border: none;
     border-radius: 5px;
     background-color: #2196F3;
@@ -384,6 +373,7 @@ body {
     flex-direction: column;
     align-items: center;
     margin: 0 auto;
+    margin-left: 2rem;
 }
 
 #lancer-de:disabled {
@@ -399,31 +389,4 @@ body {
 /* ---------------------------------------------------------*/
 /********************************/
 
-
-
-
-
-
-  
-  
-  
-  
-  
-  
-  .bouton-action {
-    background: #FFC61D;
-    color: black;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1rem;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: transform 0.2s ease, background-color 0.3s ease;
-  }
-  
-  .bouton-action:hover {
-    background: #2ED7FF;
-    transform: scale(1.1);
-  }
   
