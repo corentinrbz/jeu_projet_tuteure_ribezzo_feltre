@@ -16,7 +16,7 @@
                         <div class="nom-joueur"> Joueur 1 </div>
                     </div>
                     <div class="points-joueur">
-                        <p>0</p>
+                        <p id="points-joueur1">0</p>
                         <img src="./images/roue_noir.png" alt="Roue blanche" class="icone-roue">
                     </div>
                 </div>
@@ -30,7 +30,7 @@
                         <div class="nom-joueur"> Joueur 2 </div>
                     </div>
                     <div class="points-joueur">
-                        <p>0</p>
+                        <p id="points-joueur2">0</p>
                         <img src="./images/roue_noir.png" alt="Roue blanche" class="icone-roue">
                     </div>
                 </div>
@@ -157,28 +157,31 @@
                     </button>
                 </div>
             </div>
-
-<!--               <div class="scene-jeu">
-                    <div class="cube-jeu" id="de-2">
-                      <div class="face2 face-1"><strong>1</strong></div>
-                      <div class="face2 face-2"><strong>2</strong></div>
-                      <div class="face2 face-3"><strong>3</strong></div>
-                      <div class="face2 face-4"><strong><i class="bi bi-arrow-counterclockwise"></i></strong></div>
-                      <div class="face2 face-5"><strong><i class="bi bi-arrow-counterclockwise"></i></strong></div>
-                      <div class="face2 face-6"><strong><i class="bi bi-arrow-counterclockwise"></i></strong></div>
-                    </div>
-                    <div class="bouton-lancer3">
-                      <button id="lancer">Lancer ou <strong><i class="bi bi-caret-right-square-fill"></i></strong></button>
-                    </div>
-                  </div>-->   
                   
-                <div class="section-cartes">
-                    <div class="grp-scene-jeu">
-                        <div class="zone-carte">
-                            <img src="./images/recto_carte.png" alt="Recto de la carte question" class="recto-carte">
-                        </div>
+                <div class="popup">
+
+                  <div class="cont1">
+                    <div class="cube-jeu" id="de-2">
+                      <div class="face"></div>
                     </div>
+
+                    <div class="bouton-lancer2">
+                      <button id="lancer-de">
+                          <span class="joueur">Joueur 1</span>
+                          <span>Lancer</span>
+                      </button>
+                    </div>
+
+                  </div>
+
+                  <div class="zone-carte">
+                    
+                  </div>
                 </div>
+                
+                <button id="ouvrir-popup">Ouvrir le popup</button>
+                  
+                
         </div>
               
               
@@ -188,6 +191,9 @@
 
         </div>
     </div>
+    
     <script src="./scripts/jeu.js"></script>
+    <script src="./scripts/carte.js"></script>
+    
 </body>
 </html>

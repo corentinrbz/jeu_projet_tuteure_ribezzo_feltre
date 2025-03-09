@@ -13,17 +13,11 @@
     z-index: 1000; /* Toujours au-dessus des éléments */
   }
   
-  /* Désactive complètement le curseur natif */
-  body {
-  }
   
   button {
-    cursor: none; /* Empêche le curseur pointer par défaut sur les boutons */
+    cursor: none; 
   }
   
-  
-
-/* Style global */
 
 body {
     font-family: 'Kulim Park', sans-serif;
@@ -66,6 +60,21 @@ body {
 
 }
 
+.game-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    display: none;
+    z-index: 1000;
+    text-align: center;
+    font-size: 1.2em;
+}
+
 /* Cadre pour chaque joueur */
 .carte-joueur {
     display: flex;
@@ -76,7 +85,7 @@ body {
     border-radius: 15px;
     height: 100%;
     border: 2px solid white;
-    box-shadow: 0 4px 15px #FFC61D, 0 0 10px black;
+    box-shadow: 0 1px 1px #FFC61D, 0 0 0px black;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -183,10 +192,6 @@ body {
 }
 
 
-
-
-
-
 .scene-jeu {
     width: 100%;
     height: 100%;
@@ -196,7 +201,6 @@ body {
     justify-content: center;
     align-items: center;
     padding: 20px;
-    /*perspective: 600px;*/
     
 }
 
@@ -280,66 +284,119 @@ body {
     transform: scale(1.1);
 }
 
-/* TEST AVEC CARTES */
-.section-carte {
-    font-family: 'Kulim Park', sans-serif;
-    height: 100%;
+#de-2 {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 10px;
     display: flex;
-    flex-direction: column;
-    border-radius: 15px;
-    background-color: #FFC61D;
-    border: 2px solid white;
-    box-shadow: 0 4px 15px #FFC61D, 0 0 10px black;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.titre-section-carte {
-    display: flex;
-    font-family: 'Kulim Park', sans-serif;
-    background-color: #2ED7FF;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-    border: solid 3px #2ED7FF;
-    align-items: center;
     justify-content: center;
-}
+    align-items: center;
+  }
+  
+  #de-2 .face {
+    font-size: 24px;
+    font-weight: bold;
+  }
 
-.titre-section-carte p {
-    font-family: 'Kulim Park', sans-serif;
-    font-size: 2rem;
-    
+
+/* ---------------------------------------------------------*/
+.popup {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    min-width:50rem;
+    height: 40rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Correction ici: -50% au lieu de 50% */
+    background-color: whitesmoke;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    width: 300px; /* Ajout pour définir une largeur */
 }
 
 .zone-carte {
+    flex-direction: column;
+    display: none;
+    background-image: url(/projet_tuteure/images/recto_carte.png);
+    background-size: cover;
+
+    margin-top: 15px;
+    height: 20rem;
+    width: 40rem; /* Ajout pour définir une hauteur */
+}
+
+.face {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Styles pour la question */
+.question-text {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* Styles pour les réponses */
+.reponse {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
 }
 
+.reponse-btn {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
 
-.carte {
+.reponse-btn:hover {
+    background-color: #45a049;
+}
+
+/* Styles pour le bouton lancer */
+.bouton-lancer2 {
+    margin: 15px 0;
+    text-align: center;
+}
+
+#lancer-de {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #2196F3;
+    color: white;
+    cursor: pointer;
     display: flex;
     flex-direction: column;
-    width: auto;
-    height: 50%;
-    background-color: black;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    gap: 20px;
+    align-items: center;
+    margin: 0 auto;
 }
 
-/* Format d'image pose problème */
-.recto-carte {
-    width: 100%;
-    height: auto;
+#lancer-de:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
 }
 
-.image2-carte {
-    width: auto;
-    height: 20%;
+.joueur {
+    font-weight: bold;
+    margin-bottom: 5px;
 }
+
+/* ---------------------------------------------------------*/
 /********************************/
 
 
