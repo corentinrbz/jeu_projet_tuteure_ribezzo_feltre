@@ -1,8 +1,7 @@
-/* Corps de la page */
 body {
     font-family: 'Kulim Park', sans-serif;
     margin: 0;
-    background: black;
+    background-image: linear-gradient(to right top, #000000, #0c080a, #140f13, #18151a, #1b1a22, #1e1e26, #21232a, #24272e, #292b30, #2e2e32, #323234, #363636);
     color: #FFF;
     display: flex;
     justify-content: center;
@@ -14,7 +13,6 @@ body {
     cursor: none; /* Supprime le curseur natif pour le remplacer par une image personnalisée via JS */
   }
   
-  /* Conteneur principal */
   .jeu-interface {
     width: 90%;
     max-width: 1200px;
@@ -25,7 +23,6 @@ body {
     position: relative;
   }
   
-  /* Menu du jeu */
   .menu-jeu {
     display: flex;
     flex-direction: column;
@@ -33,7 +30,6 @@ body {
     align-items: center;
   }
   
-  /* Sélection des joueurs */
   .selection {
     display: flex;
     justify-content: space-between;
@@ -42,7 +38,6 @@ body {
     width: 80%;
   }
   
-  /* Titre joueur */
   .joueur {
     font-size: 2rem;
     color: #FFC61D;
@@ -50,13 +45,11 @@ body {
     text-shadow: 0 0 10px rgba(255, 198, 29, 0.8);
   }
   
-  /* Organisation des pions */
   .pions {
     display: flex;
     gap: 40px;
   }
   
-  /* Pions */
   .pion {
     border: 2px solid transparent;
     border-radius: 10px;
@@ -73,7 +66,6 @@ body {
     box-shadow: 0 0 10px #FFC61D;
   }
 
-  /*bouton suivant*/
   .btn {
     padding: 10px 20px;
     background-color: #007bff;
@@ -92,14 +84,7 @@ body {
   .player-info {
       margin-bottom: 20px;
       font-size: 20px;
-      color: #333;
-  }
-
-  /*nom joueur 1 et 2*/
-  .player-info {
-      margin-bottom: 20px;
-      font-size: 20px;
-      color: #333;
+      color: #ffffffb0;
   }
   
   /* Animation pour le curseur */
@@ -113,7 +98,7 @@ body {
   }
   
   .logo-jeu {
-    width: 450px;
+    width: 350px;
     height: auto;
     display: block;
     margin: 0 auto;

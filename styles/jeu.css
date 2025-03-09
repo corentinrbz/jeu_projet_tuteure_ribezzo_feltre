@@ -22,7 +22,7 @@
 body {
     font-family: 'Kulim Park', sans-serif;
     margin: 0;
-    background-image: linear-gradient(to left, #051937, #5b2c5f, #b23d61, #ea7042, #ebbd12);
+    background-image: linear-gradient(to left top, #f9f9f9, #dfdfe5, #c5c5d1, #abacbe, #9094ab, #868dab, #7a86ab, #6e80ab, #6e88be, #6b91d2, #6799e6, #5fa2fb);
     color: white;
     text-align: center;
     display: flex;
@@ -81,10 +81,10 @@ body {
     align-items: center;
     justify-content: center;
     gap: 2rem;
-    background-color: #FFC61D;
+    background-color: #b79d4f;
     border-radius: 15px;
     height: 100%;
-    border: 2px solid white;
+    border: 2px solid rgb(0, 0, 0);
     box-shadow: 0 1px 1px #FFC61D, 0 0 0px black;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -170,7 +170,7 @@ body {
     gap: 20px;
     width: 25%;
     height: auto;
-    background-color: #2ED7FF;
+    background-color: #000000;
 
     
 }
@@ -179,12 +179,12 @@ body {
     display: flex;
     flex-direction: column;
     width: auto;
+    align-items: center;
     height: 100%;
     padding: 20px;
     border-radius: 15px;
     background-color: #FFC61D;
-    border: 2px solid white;
-    box-shadow: 0 4px 15px #FFC61D, 0 0 10px black;
+    border: 5px solid rgb(47, 193, 226);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     
 
