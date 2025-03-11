@@ -35,50 +35,54 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Définition des points des joueurs
-    const playerPoints = {
-        1: 0,
-        2: 0
-    };
+    if (!window.gameState) {
+        window.gameState = {
+            playerPoints: {
+                1: 0,
+                2: 0
+            }
+        };
+    }
 
     let finishReached = false;
     let winnerByPosition = null;
 
     const specialSquares = {
         /*2: { type: 'malus-points', effect: -45, message: 'Malheureux, Vous retourner à la case départ !' },*/
-        3: { type: 'bonus-points', points: 4, message: 'Bonus ! Vous gagnez 4 goupilles !' },
+        3: { type: 'bonus-points', points: +4, message: 'Bonus ! Vous gagnez 4 goupilles !' },
         4: { type: 'bonus', effect: 4, message: 'Bonus ! Avancez de 4 cases' },
         6: { type: 'malus', effect: -5, message: 'Malus! Reculez de 5 cases' },
-        7: { type: 'bonus-points', points: 5, message: 'Bonus ! Vous gagnez 5 goupilles !' },
-        9: { type: 'malus-points', points: -4, sharePercent: 50, message: 'Malus ! Vous perdez 4 goupilles et votre adversaire en récupère 2 !' },
+        7: { type: 'bonus-points', points: +5, message: 'Bonus ! Vous gagnez 5 goupilles !' },
+        9: { type: 'malus-points', message: 'Malus ! Vous perdez 4 goupilles et votre adversaire en récupère la moitié !' },
         10: { type: 'malus', effect: -2, message: 'Malus ! Reculez de 2 cases' },
         11: { type: 'bonus', effect: 3, message: 'Super bonus ! Avancez de 3 cases' },
-        13: { type: 'malus-points', points: -4, sharePercent: 50, message: 'Malus ! Vous perdez 4 goupilles et votre adversaire en récupère 2 !' },
-        15: { type: 'bonus-points', points: 4, message: 'Bonus ! Vous gagnez 4 goupilles !' },
+        13: { type: 'malus-points', message: 'Malus ! Vous perdez 4 goupilles et votre adversaire en récupère moitié !' },
+        15: { type: 'bonus-points', points: +4, message: 'Bonus ! Vous gagnez 4 goupilles !' },
 
         //tour 2
 
-        17: { type: 'malus-points', effect: -45, message: 'Malheureux, Vous retourner à la case départ !' },
-        18: { type: 'bonus-points', points: 4, message: 'Bonus ! Vous gagnez 4 goupilles !' },
+        /*17: { type: 'malus-points', effect: -45, message: 'Malheureux, Vous retourner à la case départ !' },*/
+        18: { type: 'bonus-points', points: +4, message: 'Bonus ! Vous gagnez 4 goupilles !' },
         19: { type: 'bonus', effect: 4, message: 'Bonus ! Avancez de 4 cases' },
         21: { type: 'malus', effect: -5, message: 'Malus! Reculez de 5 cases' },
-        22: { type: 'bonus-points', points: 5, message: 'Bonus ! Vous gagnez 5 goupilles !' },
-        24: { type: 'malus-points', points: -4, sharePercent: 50, message: 'Malus ! Vous perdez 4 goupilles et votre adversaire en récupère 2 !' },
+        22: { type: 'bonus-points', points: +5, message: 'Bonus ! Vous gagnez 5 goupilles !' },
+        24: { type: 'malus-points', message: 'Malus ! Vous perdez 4 goupilles et votre adversaire en récupère 2 !' },
         25: { type: 'malus', effect: -2, message: 'Malus ! Reculez de 2 cases' },
         26: { type: 'bonus', effect: 3, message: 'Super bonus ! Avancez de 3 cases' },
-        28: { type: 'malus-points', points: -4, sharePercent: 50, message: 'Malus ! Vous perdez 4 goupilles et votre adversaire en récupère 2 !' },
-        30: { type: 'bonus-points', points: 4, message: 'Bonus ! Vous gagnez 4 goupilles !' },
+        28: { type: 'malus-points', message: 'Malus ! Vous perdez 4 goupilles et votre adversaire en récupère 2 !' },
+        30: { type: 'bonus-points', points: +4, message: 'Bonus ! Vous gagnez 4 goupilles !' },
 
 
-        32: { type: 'malus-points', effect: -45, message: 'Malheureux, Vous retourner à la case départ !' },
-        33: { type: 'bonus-points', points: 4, message: 'Bonus ! Vous gagnez 4 goupilles !' },
+        /*32: { type: 'malus-points', effect: -45, message: 'Malheureux, Vous retourner à la case départ !' },*/
+        33: { type: 'bonus-points', points: +4, message: 'Bonus ! Vous gagnez 4 goupilles !' },
         34: { type: 'bonus', effect: 4, message: 'Bonus ! Avancez de 4 cases' },
         36: { type: 'malus', effect: -5, message: 'Malus! Reculez de 5 cases' },
-        37: { type: 'bonus-points', points: 5, message: 'Bonus ! Vous gagnez 5 goupilles !' },
-        39: { type: 'malus-points', points: -4, sharePercent: 50, message: 'Malus ! Vous perdez 4 goupilles et votre adversaire en récupère 2 !' },
+        37: { type: 'bonus-points', points: +5, message: 'Bonus ! Vous gagnez 5 goupilles !' },
+        39: { type: 'malus-points', message: 'Malus ! Vous perdez 4 goupilles et votre adversaire en récupère 2 !' },
         40: { type: 'malus', effect: -2, message: 'Malus ! Reculez de 2 cases' },
         41: { type: 'bonus', effect: 3, message: 'Super bonus ! Avancez de 3 cases' },
-        43: { type: 'malus-points', points: -4, sharePercent: 50, message: 'Malus ! Vous perdez 4 goupilles et votre adversaire en récupère 2 !' },
-        45: { type: 'bonus-points', points: 4, message: 'Bonus ! Vous gagnez 4 goupilles !' },
+        43: { type: 'malus-points', message: 'Malus ! Vous perdez 4 goupilles et votre adversaire en récupère 2 !' },
+        45: { type: 'bonus-points', points: +4, message: 'Bonus ! Vous gagnez 4 goupilles !' },
 
     };
 
@@ -178,6 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         setTimeout(() => {
             const finalPosition = movePion(currentPlayer, diceValue);
+
             
             // Vérifier si le joueur a atteint la case 46 (fin du jeu)
             if (finalPosition === 46 && !finishReached) {
@@ -185,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 winnerByPosition = currentPlayer;
                 
                 // Bonus de 8 goupilles pour le premier à atteindre la fin
-                playerPoints[currentPlayer] += 8;
+                gameState.playerPoints[currentPlayer] += 8;
                 updatePointsDisplay();
                 
                 messageDiv.textContent = `Félicitations Joueur ${currentPlayer} ! Vous avez atteint l'arrivée et gagnez 8 goupilles !`;
@@ -236,7 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 winnerByPosition = currentPlayer;
                                 
                                 // Bonus de 8 goupilles pour le premier à atteindre la fin
-                                playerPoints[currentPlayer] += 8;
+                                gameState.playerPoints[currentPlayer] += 8;
                                 updatePointsDisplay();
                                 
                                 setTimeout(() => {
@@ -258,21 +263,49 @@ document.addEventListener('DOMContentLoaded', () => {
                             }
                         } else if (specialSquare.type === 'bonus-points') {
                             // Bonus de points
-                            playerPoints[currentPlayer] += specialSquare.points;
+                            gameState.playerPoints[currentPlayer] += specialSquare.points;
                             updatePointsDisplay();
                         } else if (specialSquare.type === 'malus-points') {
                             // Malus de points avec partage à l'adversaire
                             const otherPlayer = currentPlayer === 1 ? 2 : 1;
                             
-                            // Vérifier que le joueur a des points à perdre
-                            const pointsToLose = Math.min(Math.abs(specialSquare.points), playerPoints[currentPlayer]);
-                            playerPoints[currentPlayer] -= pointsToLose;
+                            // Points à perdre: 4 points
+                            const maxPointsToLose = 4;
                             
-                            // Calculer les points à donner à l'adversaire (50%)
-                            const pointsToShare = Math.floor(pointsToLose * (specialSquare.sharePercent / 100));
-                            playerPoints[otherPlayer] += pointsToShare;
+                            // Vérifier si le joueur a des points à perdre
+                            if (gameState.playerPoints[currentPlayer] <= 0) {
+                                // Si le joueur n'a pas de points, rien ne se passe
+                                messageDiv.textContent = `Vous n'avez pas de points à perdre!`;
+                                messageDiv.style.display = 'block';
+                            } else {
+                                // Déterminer combien de points le joueur va perdre
+                                const pointsToLose = Math.min(maxPointsToLose, gameState.playerPoints[currentPlayer]);
+                                gameState.playerPoints[currentPlayer] -= pointsToLose;
+                                
+                                // Points à donner à l'adversaire (la moitié des points perdus)
+                                let pointsToShare;
+                                
+                                if (pointsToLose <= 3) {
+                                    // Si le joueur perd 3 points ou moins, l'adversaire gagne 1 point
+                                    pointsToShare = 1;
+                                } else {
+                                    // Sinon l'adversaire gagne la moitié des points (donc 2 points si 4 points sont perdus)
+                                    pointsToShare = Math.floor(pointsToLose / 2);
+                                }
+                                
+                                gameState.playerPoints[otherPlayer] += pointsToShare;
+                                
+                                messageDiv.textContent = `Vous perdez ${pointsToLose} points, et votre adversaire gagne ${pointsToShare} points!`;
+                                messageDiv.style.display = 'block';
+                            }
                             
+                            // Mettre à jour l'affichage des points
                             updatePointsDisplay();
+                            
+                            // Cacher le message après un délai
+                            setTimeout(function() {
+                                messageDiv.style.display = 'none';
+                            }, 2000);
                         }
                         
                         // Masquer le message
@@ -295,8 +328,8 @@ document.addEventListener('DOMContentLoaded', () => {
     boutonLancer.addEventListener('click', handleDiceRoll);
     
     // Fonction pour terminer le tour
+    window.finishTurn = finishTurn;
     function finishTurn() {
-        window.finishTurn = finishTurn;
         // Vérifier si un joueur est sur la case 46 et si les deux joueurs ont joué
         if (playerPositions[1] === 46 || playerPositions[2] === 46) {
             const otherPlayer = currentPlayer === 1 ? 2 : 1;
@@ -320,6 +353,8 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         currentPlayer = currentPlayer === 1 ? 2 : 1;
+
+        localStorage.setItem("currentPlayer", currentPlayer.toString());
         
         // Mise à jour du texte du bouton sans changer l'ID
         const joueurSpan = boutonLancer.querySelector('.joueur');
@@ -387,11 +422,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const pointsJoueur1 = document.getElementById('points-joueur1');
         const pointsJoueur2 = document.getElementById('points-joueur2');
         
-        if (pointsJoueur1) pointsJoueur1.textContent = playerPoints[1];
-        if (pointsJoueur2) pointsJoueur2.textContent = playerPoints[2];
+        if (pointsJoueur1) pointsJoueur1.textContent = gameState.playerPoints[1];
+        if (pointsJoueur2) pointsJoueur2.textContent = gameState.playerPoints[2];
         
-        console.log("Points joueur 1:", playerPoints[1]);
-        console.log("Points joueur 2:", playerPoints[2]);
+        console.log("Points joueur 1:", gameState.playerPoints[1]);
+        console.log("Points joueur 2:", gameState.playerPoints[2]);
     }
 
     function updatePlayerHighlight(playerNumber) {
@@ -421,8 +456,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fonction pour terminer le jeu et afficher le gagnant
     function endGame() {
         // Récupérer les points finaux
-        const pointsJoueur1 = playerPoints[1];
-        const pointsJoueur2 = playerPoints[2];
+        const pointsJoueur1 = gameState.playerPoints[1];
+        const pointsJoueur2 = gameState.playerPoints[2];
         
         // Déterminer le gagnant
         let winner;
@@ -438,7 +473,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // En cas d'égalité, le joueur qui a atteint la case 46 en premier gagne
             if (winnerByPosition !== null) {
                 winner = winnerByPosition;
-                gagnantPoints = playerPoints[winnerByPosition];
+                gagnantPoints = gameState.playerPoints[winnerByPosition];
             } else {
                 // Si personne n'a atteint la case 46 (ne devrait pas arriver dans la logique du jeu)
                 winner = "Égalité";

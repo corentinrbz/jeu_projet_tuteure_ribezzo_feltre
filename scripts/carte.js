@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const zoneCarte = document.querySelector('.zone-carte');
     const boutonLancer = document.getElementById('lancer-de');
     const chronoElement = document.querySelector('.chronoo p');
-
+    
+    localStorage.setItem("currentPlayer", currentPlayer.toString());
     const questionCasesVisited = {
         1: {},
         2: {}
@@ -14,10 +15,14 @@ document.addEventListener('DOMContentLoaded', function() {
         return false; // Valeur par défaut en attendant l'initialisation complète
     };
     
-    let playerPoints = {
-        1: 0,
-        2: 0
-    };
+    if (!window.gameState) {
+        window.gameState = {
+            playerPoints: {
+                1: 0,
+                2: 0
+            }
+        };
+    }
     
     let messageDiv = document.querySelector('.game-message');
     if (!messageDiv) {
@@ -137,22 +142,20 @@ document.addEventListener('DOMContentLoaded', function() {
     function verifierReponse(reponseUtilisateur, bonneReponse) {
         // Récupérer le joueur actuel
         const currentPlayerNum = localStorage.getItem("currentPlayer") || "1";
-
-        // Marquer cette case comme visitée pour ce joueur
         const currentPosition = window.playerPositions[currentPlayerNum];
         questionCasesVisited[currentPlayerNum][currentPosition] = true;
-
+    
         console.log("Réponse sélectionnée:", reponseUtilisateur);
         console.log("Bonne réponse:", bonneReponse);
         
         if (reponseUtilisateur === bonneReponse) {
-            // Bonne réponse - attribuer 8 points au joueur courant
-            playerPoints[currentPlayerNum] += 8;
+            // Bonne réponse - attribuer 8 points au joueur courant (correction ici)
+            window.gameState.playerPoints[currentPlayerNum] += 8;
             
             // Mettre à jour l'affichage des points
             updatePointsDisplay();
             
-            // Afficher le message de réussite dans le div message (comme dans le premier fichier)
+            // Afficher le message de réussite
             messageDiv.textContent = `Bien joué ! Vous gagnez 8 goupilles !`;
             messageDiv.style.display = 'block';
             
@@ -172,7 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             fermerPopup();
         }
-
+    
         setTimeout(function() {
             // Appeler la fonction finishTurn du premier fichier si elle est disponible
             if (window.finishTurn) {
@@ -188,11 +191,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const pointsJoueur1 = document.getElementById('points-joueur1');
         const pointsJoueur2 = document.getElementById('points-joueur2');
         
-        if (pointsJoueur1) pointsJoueur1.textContent = playerPoints[1];
-        if (pointsJoueur2) pointsJoueur2.textContent = playerPoints[2];
+        if (pointsJoueur1) pointsJoueur1.textContent = window.gameState.playerPoints[1];
+        if (pointsJoueur2) pointsJoueur2.textContent = window.gameState.playerPoints[2];
         
-        console.log("Points joueur 1:", playerPoints[1]);
-        console.log("Points joueur 2:", playerPoints[2]);
+        console.log("Points joueur 1:", window.gameState.playerPoints[1]);
+        console.log("Points joueur 2:", window.gameState.playerPoints[2]);
     }
     
     function fermerPopup() {
@@ -281,9 +284,10 @@ document.addEventListener('DOMContentLoaded', function() {
         if(popup.style.display === "flex") {
             return false;
         }
-
+    
         if (verifierCaseQuestion(position, currentPlayerNum)) {
-            questionCasesVisited[currentPlayerNum][position] = true;
+            // Ne pas marquer immédiatement la case comme visitée
+            // Cela se fera dans verifierReponse après que le joueur ait répondu
             if (boutonLancer) {
                 boutonLancer.disabled = false;
             }
