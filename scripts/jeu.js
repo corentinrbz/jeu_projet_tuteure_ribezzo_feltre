@@ -1,38 +1,54 @@
 document.addEventListener('DOMContentLoaded', () => {
-
     const player1Pion = localStorage.getItem('player1Token');
     const player2Pion = localStorage.getItem('player2Token');
 
+    // Création du SVG s'il n'existe pas déjà
+    let svg = document.querySelector('.bas svg');
+    if (!svg) {
+        const svgNS = "http://www.w3.org/2000/svg";
+        svg = document.createElementNS(svgNS, "svg");
+        svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+        svg.setAttribute("width", "1851.429");
+        svg.setAttribute("height", "1096");
+        svg.setAttribute("viewBox", "0 0 1851.429 1096");
+        
+        // Ajouter le SVG après la div background
+        const basElement = document.querySelector('.bas');
+        basElement.appendChild(svg);
+    }
+
+    // Coordonnées par défaut ou à partir d'un élément de départ
+    let x = 900;
+    let y = 500;
+    
     const startPoint = document.getElementById('depart');
     if (startPoint) {
-        const x = startPoint.getAttribute('x') || startPoint.getAttribute('cx') || 900;
-        const y = startPoint.getAttribute('y') || startPoint.getAttribute('cy') || 500;
-
-        const svgNS = "http://www.w3.org/2000/svg";
-        
-        // Pion joueur 1
-        const pion1 = document.createElementNS(svgNS, "image");
-        pion1.setAttributeNS(null, "href", player1Pion);
-        pion1.setAttributeNS(null, "width", "50"); 
-        pion1.setAttributeNS(null, "height", "50");
-        pion1.setAttributeNS(null, "x", Number(x) - 20); 
-        pion1.setAttributeNS(null, "y", Number(y) - 15);
-        pion1.setAttributeNS(null, "id", "pion-joueur1");
-
-        // Pion joueur 2
-        const pion2 = document.createElementNS(svgNS, "image");
-        pion2.setAttributeNS(null, "href", player2Pion);
-        pion2.setAttributeNS(null, "width", "50");
-        pion2.setAttributeNS(null, "height", "50");
-        pion2.setAttributeNS(null, "x", Number(x) + 20);
-        pion2.setAttributeNS(null, "y", Number(y) - 15);
-        pion2.setAttributeNS(null, "id", "pion-joueur2");
-
-        const svg = document.querySelector('svg');
-        
-        svg.appendChild(pion1);
-        svg.appendChild(pion2);
+        x = startPoint.getAttribute('x') || startPoint.getAttribute('cx') || x;
+        y = startPoint.getAttribute('y') || startPoint.getAttribute('cy') || y;
     }
+
+    const svgNS = "http://www.w3.org/2000/svg";
+    
+    // Pion joueur 1
+    const pion1 = document.createElementNS(svgNS, "image");
+    pion1.setAttributeNS(null, "href", player1Pion);
+    pion1.setAttributeNS(null, "width", "100"); 
+    pion1.setAttributeNS(null, "height", "100");
+    pion1.setAttributeNS(null, "x", Number(x) - 50); 
+    pion1.setAttributeNS(null, "y", Number(y) + 15);
+    pion1.setAttributeNS(null, "id", "pion-joueur1");
+
+    // Pion joueur 2
+    const pion2 = document.createElementNS(svgNS, "image");
+    pion2.setAttributeNS(null, "href", player2Pion);
+    pion2.setAttributeNS(null, "width", "100");
+    pion2.setAttributeNS(null, "height", "100");
+    pion2.setAttributeNS(null, "x", Number(x) + 0);
+    pion2.setAttributeNS(null, "y", Number(y) - 25);
+    pion2.setAttributeNS(null, "id", "pion-joueur2");
+    
+    svg.appendChild(pion1);
+    svg.appendChild(pion2);
 
     // Définition des points des joueurs
     if (!window.gameState) {
@@ -49,40 +65,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const specialSquares = {
         /*2: { type: 'malus-points', effect: -45, message: 'Malheureux, Vous retourner à la case départ !' },*/
-        3: { type: 'bonus-points', points: +4, message: 'Bonus ! Vous gagnez 4 goupilles !' },
+        3: { type: 'bonus-points', points: 4, message: 'Bonus ! Vous gagnez 4 goupilles !' },
         4: { type: 'bonus', effect: 4, message: 'Bonus ! Avancez de 4 cases' },
         6: { type: 'malus', effect: -5, message: 'Malus! Reculez de 5 cases' },
-        7: { type: 'bonus-points', points: +5, message: 'Bonus ! Vous gagnez 5 goupilles !' },
+        7: { type: 'bonus-points', points: 5, message: 'Bonus ! Vous gagnez 5 goupilles !' },
         9: { type: 'malus-points', message: 'Malus ! Vous perdez 4 goupilles et votre adversaire en récupère la moitié !' },
         10: { type: 'malus', effect: -2, message: 'Malus ! Reculez de 2 cases' },
         11: { type: 'bonus', effect: 3, message: 'Super bonus ! Avancez de 3 cases' },
-        13: { type: 'malus-points', message: 'Malus ! Vous perdez 4 goupilles et votre adversaire en récupère moitié !' },
-        15: { type: 'bonus-points', points: +4, message: 'Bonus ! Vous gagnez 4 goupilles !' },
+        13: { type: 'malus-points', message: 'Malus ! Vous perdez 4 goupilles !' },
+        15: { type: 'bonus-points', points: 4, message: 'Bonus ! Vous gagnez 4 goupilles !' },
 
         //tour 2
 
-        /*17: { type: 'malus-points', effect: -45, message: 'Malheureux, Vous retourner à la case départ !' },*/
-        18: { type: 'bonus-points', points: +4, message: 'Bonus ! Vous gagnez 4 goupilles !' },
+        //17: { type: 'malus-points', effect: -45, message: 'Malheureux, Vous retourner à la case départ !' },
+        18: { type: 'bonus-points', points: 4, message: 'Bonus ! Vous gagnez 4 goupilles !' },
         19: { type: 'bonus', effect: 4, message: 'Bonus ! Avancez de 4 cases' },
         21: { type: 'malus', effect: -5, message: 'Malus! Reculez de 5 cases' },
-        22: { type: 'bonus-points', points: +5, message: 'Bonus ! Vous gagnez 5 goupilles !' },
-        24: { type: 'malus-points', message: 'Malus ! Vous perdez 4 goupilles et votre adversaire en récupère 2 !' },
+        22: { type: 'bonus-points', points: 5, message: 'Bonus ! Vous gagnez 5 goupilles !' },
+        24: { type: 'malus-points', points: -4, sharePercent: 50, message: 'Malus ! Vous perdez 4 goupilles et votre adversaire en récupère 2 !' },
         25: { type: 'malus', effect: -2, message: 'Malus ! Reculez de 2 cases' },
         26: { type: 'bonus', effect: 3, message: 'Super bonus ! Avancez de 3 cases' },
-        28: { type: 'malus-points', message: 'Malus ! Vous perdez 4 goupilles et votre adversaire en récupère 2 !' },
-        30: { type: 'bonus-points', points: +4, message: 'Bonus ! Vous gagnez 4 goupilles !' },
+        28: { type: 'malus-points', points: -4, sharePercent: 50, message: 'Malus ! Vous perdez 4 goupilles et votre adversaire en récupère 2 !' },
+        30: { type: 'bonus-points', points: 4, message: 'Bonus ! Vous gagnez 4 goupilles !' },
 
 
-        /*32: { type: 'malus-points', effect: -45, message: 'Malheureux, Vous retourner à la case départ !' },*/
-        33: { type: 'bonus-points', points: +4, message: 'Bonus ! Vous gagnez 4 goupilles !' },
+        //32: { type: 'malus-points', effect: -45, message: 'Malheureux, Vous retourner à la case départ !' },
+        33: { type: 'bonus-points', points: 4, message: 'Bonus ! Vous gagnez 4 goupilles !' },
         34: { type: 'bonus', effect: 4, message: 'Bonus ! Avancez de 4 cases' },
         36: { type: 'malus', effect: -5, message: 'Malus! Reculez de 5 cases' },
-        37: { type: 'bonus-points', points: +5, message: 'Bonus ! Vous gagnez 5 goupilles !' },
-        39: { type: 'malus-points', message: 'Malus ! Vous perdez 4 goupilles et votre adversaire en récupère 2 !' },
+        37: { type: 'bonus-points', points: 5, message: 'Bonus ! Vous gagnez 5 goupilles !' },
+        39: { type: 'malus-points', points: -4, sharePercent: 50, message: 'Malus ! Vous perdez 4 goupilles et votre adversaire en récupère 2 !' },
         40: { type: 'malus', effect: -2, message: 'Malus ! Reculez de 2 cases' },
         41: { type: 'bonus', effect: 3, message: 'Super bonus ! Avancez de 3 cases' },
-        43: { type: 'malus-points', message: 'Malus ! Vous perdez 4 goupilles et votre adversaire en récupère 2 !' },
-        45: { type: 'bonus-points', points: +4, message: 'Bonus ! Vous gagnez 4 goupilles !' },
+        43: { type: 'malus-points', points: -4, sharePercent: 50, message: 'Malus ! Vous perdez 4 goupilles et votre adversaire en récupère 2 !' },
+        45: { type: 'bonus-points', points: 4, message: 'Bonus ! Vous gagnez 4 goupilles !' },
 
     };
 
@@ -182,7 +198,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         setTimeout(() => {
             const finalPosition = movePion(currentPlayer, diceValue);
-
             
             // Vérifier si le joueur a atteint la case 46 (fin du jeu)
             if (finalPosition === 46 && !finishReached) {
@@ -269,9 +284,9 @@ document.addEventListener('DOMContentLoaded', () => {
                             // Malus de points avec partage à l'adversaire
                             const otherPlayer = currentPlayer === 1 ? 2 : 1;
                             
-                            // Points à perdre: 4 points
+                            // Vérifier que le joueur a des points à perdre
                             const maxPointsToLose = 4;
-                            
+
                             // Vérifier si le joueur a des points à perdre
                             if (gameState.playerPoints[currentPlayer] <= 0) {
                                 // Si le joueur n'a pas de points, rien ne se passe
@@ -298,10 +313,11 @@ document.addEventListener('DOMContentLoaded', () => {
                                 messageDiv.textContent = `Vous perdez ${pointsToLose} points, et votre adversaire gagne ${pointsToShare} points!`;
                                 messageDiv.style.display = 'block';
                             }
+                           
                             
-                            // Mettre à jour l'affichage des points
+                            
                             updatePointsDisplay();
-                            
+
                             // Cacher le message après un délai
                             setTimeout(function() {
                                 messageDiv.style.display = 'none';
@@ -328,8 +344,8 @@ document.addEventListener('DOMContentLoaded', () => {
     boutonLancer.addEventListener('click', handleDiceRoll);
     
     // Fonction pour terminer le tour
-    window.finishTurn = finishTurn;
     function finishTurn() {
+        window.finishTurn = finishTurn;
         // Vérifier si un joueur est sur la case 46 et si les deux joueurs ont joué
         if (playerPositions[1] === 46 || playerPositions[2] === 46) {
             const otherPlayer = currentPlayer === 1 ? 2 : 1;
@@ -359,7 +375,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Mise à jour du texte du bouton sans changer l'ID
         const joueurSpan = boutonLancer.querySelector('.joueur');
         if (joueurSpan) {
-            joueurSpan.textContent = `Joueur ${currentPlayer}`;
+            joueurSpan.textContent = `Joueur ${currentPlayer},`;
         }
         
         // Juste changer l'attribut data-player sans changer l'ID
@@ -433,25 +449,31 @@ document.addEventListener('DOMContentLoaded', () => {
         // Sélectionner les deux cartes de joueur
         const carteJoueur1 = document.querySelector('.carte-joueur:nth-child(1)');
         const carteJoueur2 = document.querySelector('.carte-joueur:nth-child(2)');
-        
+    
         if (playerNumber === 1) {
-            // Mettre en évidence le joueur 1
-            carteJoueur1.style.backgroundColor = '#FFA500'; 
+            // J1 actif
+            carteJoueur1.style.backgroundColor = 'black'; 
             carteJoueur1.style.transform = 'scale(1.1)';
-            
-            // Remettre le joueur 1 à l'état normal
-            carteJoueur2.style.backgroundColor = '#b79d4f';
+            carteJoueur1.style.border = '4px solid #FFC61D';
+    
+            // J2 inactif
+            carteJoueur2.style.backgroundColor = 'black';
+            carteJoueur2.style.border = 'none';
             carteJoueur2.style.transform = 'scale(1)';
+    
         } else {
-            // Mettre en évidence le joueur 2
-            carteJoueur2.style.backgroundColor = '#FFA500'; // Orange plus foncé
+            // J2 actif
+            carteJoueur2.style.backgroundColor = 'black';
             carteJoueur2.style.transform = 'scale(1.1)';
-            
-            // Remettre le joueur 1 à l'état normal
-            carteJoueur1.style.backgroundColor = '#b79d4f';
+            carteJoueur2.style.border = '4px solid #FFC61D';
+    
+            // J1 inactif
+            carteJoueur1.style.backgroundColor = 'black';
+            carteJoueur1.style.border = 'none';
             carteJoueur1.style.transform = 'scale(1)';
         }
     }
+    
 
     // Fonction pour terminer le jeu et afficher le gagnant
     function endGame() {
@@ -490,76 +512,84 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Fonction pour créer le popup de fin de jeu
     function createEndGamePopup(winner, points) {
+
+        const fondGris2 = document.createElement('div');
+        fondGris2.className = 'fond-gris2';
+        fondGris2.style.position = 'fixed'
+        fondGris2.style.top = '0';
+        fondGris2.style.left = '0';
+        fondGris2.style.width = '100%';
+        fondGris2.style.height = '100%';
+        fondGris2.style.background = 'rgba(0, 0, 0, 0.8)';
+        fondGris2.style.zIndex = '11';
+
+
+
         // Créer le conteneur du popup
         const popupContainer = document.createElement('div');
-        popupContainer.className = 'end-game-popup-container';
+        popupContainer.className = 'end-game-popup';
+        popupContainer.style.flexDirection = 'column';
         popupContainer.style.position = 'fixed';
-        popupContainer.style.top = '0';
-        popupContainer.style.left = '0';
-        popupContainer.style.width = '100%';
-        popupContainer.style.height = '100%';
-        popupContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
         popupContainer.style.display = 'flex';
-        popupContainer.style.justifyContent = 'center';
         popupContainer.style.alignItems = 'center';
-        popupContainer.style.zIndex = '1000';
-        
-        const popup = document.createElement('div');
-        popup.className = 'end-game-popup';
-        popup.style.backgroundColor = '#FFC61D';
-        popup.style.borderRadius = '10px';
-        popup.style.padding = '30px';
-        popup.style.textAlign = 'center';
-        popup.style.boxShadow = '0 0 20px rgba(0, 0, 0, 0.5)';
-        popup.style.maxWidth = '500px';
-        popup.style.width = '80%';
+        popupContainer.style.justifyContent = 'center';
+        popupContainer.style.gap = '1rem'
+        popupContainer.style.top = '50%';
+        popupContainer.style.left = '50%';
+        popupContainer.style.transform = 'translate(-50%, -50%)';
+        popupContainer.style.backgroundImage = 'linear-gradient(to bottom right, #FFC61D, #D9A617, #B38612, #8C670C, #664808)';
+        popupContainer.style.padding = '2rem';
+        popupContainer.style.borderRadius = '50px';
+        popupContainer.style.border = 'solid black 4px';
+        popupContainer.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.3)'; 
+        popupContainer.style.zIndex = '12';
         
         const title = document.createElement('h2');
-        title.textContent = 'Fin de la partie !';
-        title.style.marginTop = '0';
-        title.style.fontSize = '28px';
-        title.style.color = '#333';
+        title.textContent = 'Fin de la partie';
+        title.style.fontSize = '4rem';
         
         const message = document.createElement('p');
         if (winner === "Égalité") {
             message.textContent = `Égalité ! Les deux joueurs ont ${points} goupilles !`;
+            message.fontSize = '1.8rem';
         } else {
             message.textContent = `Le Joueur ${winner} a gagné avec ${points} goupilles !`;
+            message.fontSize = '1.8rem';
         }
-        message.style.fontSize = '20px';
-        message.style.margin = '20px 0';
-        message.style.color = '#333';
+        
         
         const button = document.createElement('button');
         button.textContent = 'Retour au menu';
-        button.style.backgroundColor = '#FF8C00';
-        button.style.color = 'white';
-        button.style.border = 'none';
-        button.style.padding = '12px 24px';
-        button.style.borderRadius = '5px';
-        button.style.fontSize = '18px';
+        message.style.fontFamily = 'Konkhmer Sleokchher", serif';
+        button.style.backgroundColor = 'black';
+        message.style.color = 'white';
+        button.style.border = 'solid 4px black';
+        button.style.borderRadius = '50px';
+        button.style.fontSize = '2rem';
+        button.style.fontWeight ='bold';
         button.style.cursor = 'pointer';
+        button.style.padding = '0.2rem 0.9rem';
         button.style.transition = 'background-color 0.3s';
         
         button.addEventListener('mouseover', function() {
-            this.style.backgroundColor = '#E57C00';
+            this.style.backgroundColor = 'white';
+            this.style.color = 'black';
         });
-        
+
         button.addEventListener('mouseout', function() {
-            this.style.backgroundColor = '#FF8C00';
+            this.style.backgroundColor = 'black';
+            this.style.color = 'white';
         });
         
         button.addEventListener('click', function() {
-            // Rediriger vers la page du menu
             window.location.href = 'index.html';
         });
         
-        popup.appendChild(title);
-        popup.appendChild(message);
-        popup.appendChild(button);
+        popupContainer.appendChild(title);
+        popupContainer.appendChild(message);
+        popupContainer.appendChild(button);
         
-        popupContainer.appendChild(popup);
-        
+        document.body.appendChild(fondGris2);
         document.body.appendChild(popupContainer);
     }
 });

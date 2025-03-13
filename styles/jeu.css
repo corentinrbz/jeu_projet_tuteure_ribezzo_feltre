@@ -1,28 +1,7 @@
-/* Animation de rotation */
-@keyframes rotation {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-  
-  /* Apparence du curseur personnalisé */
-  #rotating-cursor {
-    z-index: 1000; /* Toujours au-dessus des éléments */
-  }
-  
-  
-  button {
-    cursor: none; 
-  }
-  
-
 body {
     font-family: 'Kulim Park', sans-serif;
     margin: 0;
-    background-image: linear-gradient(to left top, #f9f9f9, #dfdfe5, #c5c5d1, #abacbe, #9094ab, #868dab, #7a86ab, #6e80ab, #6e88be, #6b91d2, #6799e6, #5fa2fb);
+    background: linear-gradient(to bottom, #2ED7FF, #1a6d85, #0d2f3b, #081b24);
     color: white;
     text-align: center;
     display: flex;
@@ -33,6 +12,26 @@ body {
     overflow: hidden;
 
 }
+
+
+@keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  #rotating-cursor {
+    z-index: 1000;
+  }
+  
+  
+  button {
+    cursor: none; 
+  }
+  
 
 /* Container principal */
 .container {
@@ -81,33 +80,32 @@ body {
     align-items: center;
     justify-content: center;
     gap: 2rem;
-    background-color: #b79d4f;
-    border-radius: 15px;
-    height: 100%;
-    border: 2px solid rgb(0, 0, 0);
+    border-radius: 50px;
+    height: 95%;
+    border: none;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 #timer{
     color: #0a0b0b;
     font-weight: bold;
-    font-size: larger;
+    font-size: 2rem;
 }
 
 .infos-joueur {
     display: flex;
     flex-direction: row;
-    gap: 20px;
     align-items: center;
     height: auto;
     width: 100%;
-    color: black;
+    color: white;
 }
 
 
 .nom-joueur {
     font-size: 1.5rem;
     padding: 2rem;
+
 }
 
 .points-joueur {
@@ -117,17 +115,95 @@ body {
     gap: 5px;
     height: 60px;
     padding: 1rem;
-    color: black;
+    color: white;
+    font-family: "Konkhmer Sleokchher", serif;
+    font-weight: 400;
 }
 
 .icone-roue {
-    width: 20px;
-    height: 20px;
-    color: black;
+    width: 35px;
+    height: 35px;
 
 }
 
-.bas {
+.icone-roue-fond {
+    width: 14rem;
+    height: auto;
+    position: absolute;
+    top: -4rem;
+    left: -4rem;
+    rotate: 25deg;
+    opacity: 0.1;
+    z-index: -16;
+}
+
+.icone-roue-fond2 {
+    width: 6rem;
+    height: auto;
+    position: absolute;
+    top: 5.5rem;
+    left: 10rem;
+    rotate: 21deg;
+    opacity: 0.1;
+    z-index: -16;
+}
+
+.icone-roue-fond3 {
+    width: 30rem;
+    height: auto;
+    position: absolute;
+    top: 30rem;
+    left: 15rem;
+    rotate: 41deg;
+    opacity: 0.1;
+    z-index: -16;
+}
+
+.icone-roue-fond4 {
+    width: 10rem;
+    height: auto;
+    position: absolute;
+    top: 15rem;
+    left: 55rem;
+    rotate: 41deg;
+    opacity: 0.1;
+    z-index: -16;
+}
+
+.icone-roue-fond5 {
+    width: 40rem;
+    height: auto;
+    position: absolute;
+    top: 20rem;
+    left: 75rem;
+    rotate: 13deg;
+    opacity: 0.1;
+    z-index: -26;
+}
+
+.icone-roue-fond6 {
+    width: 9rem;
+    height: auto;
+    position: absolute;
+    top: 5rem;
+    left: 0%;
+    rotate: 25deg;
+    opacity: 0.1;
+}
+
+.icone-roue-fond7 {
+    width: 10rem;
+    height: auto;
+    position: absolute;
+    top: 0rem;
+    left: 50%;
+    rotate: 90deg;
+    opacity: 0.1;
+}
+
+
+
+ /*.bas {
     display: flex;
     height: 90%;
     width: auto;
@@ -139,9 +215,45 @@ body {
 .bas svg{
     max-width: 1000px;
     opacity: 1;
+   display:flex ;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../images/circuit1.png);
+    width :1851.429px;
+    height: 1096px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}*/
 
+.bas {
+    position: relative;
+    width: 100%;
+    max-width: 1851.429px;
+    height: 1096px;
 }
 
+.bas .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(../images/circuit2.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 1;
+}
+
+.bas svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2; /* Cette valeur est plus élevée que celle du background, donc en avant-plan */
+}
 
 .jeu-plateau {
     width: 100%;
@@ -152,11 +264,33 @@ body {
     display: flex;
     flex-direction: column;
     padding: 20px;
-    gap: 20px;
     width: 25%;
     height: auto;
+    gap: 2rem;
+}
 
-    
+@keyframes flotterettanguer {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-10px) rotate(2deg);
+    }
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+}
+
+.bulle-mascotte {
+    width: auto;
+    height: 40%;
+    animation: flotterettanguer 3s infinite ease-in-out;
+}
+
+.de-jouer {
+    width: 100%;
+    height: auto;
+    z-index: -1;
 }
 
 .gauche {
@@ -164,21 +298,22 @@ body {
     flex-direction: column;
     width: auto;
     align-items: center;
-    height: 50%;
+    height: auto;
     padding: 20px;
-    border-radius: 15px;
-    background-image: linear-gradient(to left top, #ffc61d, #ffbc49, #feb566, #f4b17f, #e3af94);
-    border: 5px solid rgb(25, 30, 31);
+    border-radius: 50px;
+    background-image: linear-gradient(to bottom right, #FFC61D, #D9A617, #B38612, #8C670C, #664808);
+    border: 4px solid black;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 
 .scene-jeu {
+    position: relative;
     width: 100%;
     height: 100%;
     display: flex;
+    gap: 2rem;
     flex-direction: column;
-    gap: 40px;
     justify-content: center;
     align-items: center;
     padding: 20px;
@@ -186,73 +321,86 @@ body {
 }
 
 .cube-jeu {
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
     position: relative;
-    transform-style: preserve-3d;
-    transform: rotateX(0deg) rotateY(0deg);
-    transition: transform 1s ease-in-out;
 }
 
+.cube-jeu2 {
+    width: 200px;
+    height: 200px;
+    display: flex;
+}
+
+
 .face {
-    width: 100px;
-    height: 100px;
-    background: #0a0b0b;
-    color: white;
-    font-size: 1.2rem;
+    width: 100%;
+    height: 100%;
+    background: white;
+    color: black;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid white;
+    border: 4px solid black;
     position: absolute;
-    border-radius: 10px;
+    border-radius: 50px;
+    font-size: 7rem;
+    font-weight: bold;
+    z-index: 4;
 }
+
+
 
 .bouton-lancer1 {
     display: flex;
     flex-direction: column;
+    width: 200px;
 
 }
 
-.bouton-lancer2 {
-    display: flex;
-    flex-direction: column;
-}
 
 .bouton-lancer1 button {
-    background: #efefef;
-    color: rgb(0, 0, 0);
-    border: 1px solid #f3f3f3;
+    background: black;
+    color: white;
+    border: solid 4px black;
     align-items: center;
     justify-content: center;
     padding: 5px 5px;
-    font-size: 1rem;
-    height: 50px;
-    width: 130px;
-    border-radius: 15px;
+    font-size: 1.3rem;
+    height: auto;
+    width: 100%;
+    border-radius: 50px;
     cursor: pointer;
     transition: transform 0.2s ease, background-color 0.3s ease;
     overflow: hidden;
 }
   
 .bouton-lancer1 button:hover {
-    background: rgb(170, 157, 157);
-    color: #2ED7FF;
-    border: 1px solid #2ED7FF;
+    background: #2ED7FF;
+    color: black;
+    border: 4px solid black;
 
 }
 
+
+.bouton-lancer2 {
+    display: flex;
+    flex-direction: column;
+
+}
+
+
 .bouton-lancer2 button {
-    background: #FFC61D;
+    background: black;
     color: white;
-    border: 1px solid #FFC61D;
+    border: 4px solid black;
     align-items: center;
     justify-content: center;
     padding: 5px 5px;
     font-size: 1.2rem;
     height: 40px;
-    width: 140px;
-    border-radius: 15px;
+    width: auto;
+    border-radius: 50px;
     cursor: pointer;
     transition: transform 0.2s ease, background-color 0.3s ease;
     overflow: hidden;
@@ -261,69 +409,92 @@ body {
 .bouton-lancer2 button:hover {
     background: black;
     color: #FFC61D;
-    border: 1px solid #FFC61D;
-    transform: scale(1.1);
+    border: 4px solid #FFC61D;
+
 }
 
-#de-2 {
-    position: relative;
-    width: 60px;
-    height: 60px;
-    background-color: white;
-    border: 2px solid black;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  #de-2 .face {
-    font-size: 24px;
-    font-weight: bold;
-  }
+#lancer-de:disabled {
+    background-color: #cccccc;
+    color: white;
+    cursor: not-allowed;
+    border-color: #cccccc;
+}
 
 
 /* ---------------------------------------------------------*/
-.popup {
+
+.fond-gris {
     display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9;
+
+}
+
+
+.popup {
+    gap: 1.5rem;
     flex-direction: column;
     position: fixed;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width:50rem;
-    height: 40rem;
+    display: none;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Correction ici: -50% au lieu de 50% */
-    background-color: whitesmoke;
+    transform: translate(-50%, -50%);
+    /*background-image: linear-gradient(to bottom right, #FFC61D, #D9A617, #B38612, #8C670C, #664808);*/
+    background-color: #c59a18;
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 50px;
+    border: solid black 4px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
+    z-index: 10;
+}
+
+.chronoo{
+    display: flex;
 }
 
 .cont1{
     display: flex;
     align-items: center;
-    margin-bottom: 3rem;
-}
-
-.cont2{
-    width: 30rem;
     height: auto;
+    width: 100%;
+    justify-content: space-evenly;
+    gap: 1.5rem;
+
+
 }
 
 .zone-carte {
     flex-direction: column;
     display: none;
-    margin-top: 15px;
 }
 
-.face {
-    font-size: 24px;
+.face2 {
+    width: 100px;
+    height: 100px;
+    background: white;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 4px solid black;
+    border-radius: 25px;
+    font-size: 2rem;
     font-weight: bold;
+    z-index: 4;
 }
+
+#de-2{
+    color: black;
+}
+
 
 /* Styles pour la question */
 .question-text {
@@ -342,51 +513,24 @@ body {
 }
 
 .reponse-btn {
-    padding: 10px;
+    font-size: 1.3rem;
+    font-family: 'Kulim Park', sans-serif;
+    padding: 0.5rem;
     border: none;
-    border-radius: 5px;
-    background-color: #f7ab1d;
+    border-radius: 50px;
+    background-color: black;
     color: white;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
 .reponse-btn:hover {
-    background-color: #d0ca2e;
+    background-color: #2ED7FF;
 }
 
-/* Styles pour le bouton lancer */
-.bouton-lancer2 {
-    margin: 15px 0;
-    text-align: center;
-}
 
-#lancer-de {
-    padding: 30px   20px;
-    width: auto;
-    border: none;
-    border-radius: 5px;
-    background-color: #2196F3;
-    color: white;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0 auto;
-    margin-left: 2rem;
-}
-
-#lancer-de:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
-}
 
 .joueur {
     font-weight: bold;
     margin-bottom: 5px;
 }
-
-/* ---------------------------------------------------------*/
-/********************************/
-
-  

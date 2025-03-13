@@ -4,8 +4,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const zoneCarte = document.querySelector('.zone-carte');
     const boutonLancer = document.getElementById('lancer-de');
     const chronoElement = document.querySelector('.chronoo p');
-    
+
     localStorage.setItem("currentPlayer", currentPlayer.toString());
+
     const questionCasesVisited = {
         1: {},
         2: {}
@@ -56,7 +57,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function ouvrirPopup() {
+        document.getElementById('fond-gris').style.display = 'block';
         popup.style.display = 'flex';
+        chronoElement.style.display = 'none';
         console.log("Popup ouvert");
     }
     
@@ -134,8 +137,9 @@ document.addEventListener('DOMContentLoaded', function() {
         zoneCarte.appendChild(questionElement);
         zoneCarte.appendChild(reponsesElement);
         
-        // Afficher la zone carte
+        // Afficher 
         zoneCarte.style.display = 'flex';
+        chronoElement.style.display = 'flex';
     }
     
     // Fonction pour vérifier la réponse
@@ -144,18 +148,18 @@ document.addEventListener('DOMContentLoaded', function() {
         const currentPlayerNum = localStorage.getItem("currentPlayer") || "1";
         const currentPosition = window.playerPositions[currentPlayerNum];
         questionCasesVisited[currentPlayerNum][currentPosition] = true;
-    
+
         console.log("Réponse sélectionnée:", reponseUtilisateur);
         console.log("Bonne réponse:", bonneReponse);
         
         if (reponseUtilisateur === bonneReponse) {
-            // Bonne réponse - attribuer 8 points au joueur courant (correction ici)
-            window.gameState.playerPoints[currentPlayerNum] += 8;
+            // Bonne réponse - attribuer 8 points au joueur courant
+            gameState.playerPoints[currentPlayerNum] += 8;
             
             // Mettre à jour l'affichage des points
             updatePointsDisplay();
             
-            // Afficher le message de réussite
+            // Afficher le message de réussite dans le div message (comme dans le premier fichier)
             messageDiv.textContent = `Bien joué ! Vous gagnez 8 goupilles !`;
             messageDiv.style.display = 'block';
             
@@ -175,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             fermerPopup();
         }
-    
+
         setTimeout(function() {
             // Appeler la fonction finishTurn du premier fichier si elle est disponible
             if (window.finishTurn) {
@@ -194,12 +198,13 @@ document.addEventListener('DOMContentLoaded', function() {
         if (pointsJoueur1) pointsJoueur1.textContent = window.gameState.playerPoints[1];
         if (pointsJoueur2) pointsJoueur2.textContent = window.gameState.playerPoints[2];
         
-        console.log("Points joueur 1:", window.gameState.playerPoints[1]);
-        console.log("Points joueur 2:", window.gameState.playerPoints[2]);
+        console.log("Points joueur 1:", gameState.playerPoints[1]);
+        console.log("Points joueur 2:", gameState.playerPoints[2]);
     }
     
     function fermerPopup() {
         popup.style.display = 'none';
+        document.getElementById('fond-gris').style.display = 'none';
         zoneCarte.style.display = 'none';
         boutonLancer.disabled = false;
         clearInterval(timerInterval); // Arrêt du chronomètre
@@ -212,11 +217,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function startTimer() {
         let timeLeft = 20; // Temps initial en secondes
-        chronoElement.textContent = timeLeft + " sec"; // Affichage initial
+        chronoElement.textContent = "20 seconde(s)"; // Affichage initial
 
         timerInterval = setInterval(function() {
             timeLeft--;
-            chronoElement.textContent = timeLeft + " sec";
+            chronoElement.textContent = timeLeft + " seconde(s)";
 
             if (timeLeft <= 0) {
                 clearInterval(timerInterval);
@@ -242,7 +247,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const valeurDe = Math.floor(Math.random() * 3) + 1;
         
         // Afficher la valeur sur le dé
-        const faceDiv = document.querySelector('#de-2 .face');
+        const faceDiv = document.querySelector('.face2');
         if (faceDiv) {
             faceDiv.textContent = valeurDe;
         }
@@ -284,10 +289,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if(popup.style.display === "flex") {
             return false;
         }
-    
+
         if (verifierCaseQuestion(position, currentPlayerNum)) {
-            // Ne pas marquer immédiatement la case comme visitée
-            // Cela se fera dans verifierReponse après que le joueur ait répondu
+            questionCasesVisited[currentPlayerNum][position] = true;
             if (boutonLancer) {
                 boutonLancer.disabled = false;
             }
@@ -310,7 +314,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function chargerQuestions() {
-        fetch('/projet_tuteure/question.json')
+        fetch('question.json')
             .then(response => response.json())
             .then(data => {
                 baseQuestions = data;
