@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let winnerByPosition = null;
 
     const specialSquares = {
-        /*2: { type: 'malus-points', effect: -45, message: 'Malheureux, Vous retourner à la case départ !' },*/
+        2: { type: 'malus', effect: -45, message: 'Malheureux, Vous retourner à la case départ !' },
         3: { type: 'bonus-points', points: 4, message: 'Bonus ! Vous gagnez 4 goupilles !' },
         4: { type: 'bonus', effect: 4, message: 'Bonus ! Avancez de 4 cases' },
         6: { type: 'malus', effect: -5, message: 'Malus! Reculez de 5 cases' },
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         //tour 2
 
-        //17: { type: 'malus-points', effect: -45, message: 'Malheureux, Vous retourner à la case départ !' },
+        17: { type: 'malus', effect: -45, message: 'Malheureux, Vous retourner à la case départ !' },
         18: { type: 'bonus-points', points: 4, message: 'Bonus ! Vous gagnez 4 goupilles !' },
         19: { type: 'bonus', effect: 4, message: 'Bonus ! Avancez de 4 cases' },
         21: { type: 'malus', effect: -5, message: 'Malus! Reculez de 5 cases' },
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
         30: { type: 'bonus-points', points: 4, message: 'Bonus ! Vous gagnez 4 goupilles !' },
 
 
-        //32: { type: 'malus-points', effect: -45, message: 'Malheureux, Vous retourner à la case départ !' },
+        32: { type: 'malus', effect: -45, message: 'Malheureux, Vous retourner à la case départ !' },
         33: { type: 'bonus-points', points: 4, message: 'Bonus ! Vous gagnez 4 goupilles !' },
         34: { type: 'bonus', effect: 4, message: 'Bonus ! Avancez de 4 cases' },
         36: { type: 'malus', effect: -5, message: 'Malus! Reculez de 5 cases' },
